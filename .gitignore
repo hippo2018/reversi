@@ -1,2 +1,4 @@
 back/data/*.sqlite
 back/data/*.sqlite-*
+*.zip
+/release/

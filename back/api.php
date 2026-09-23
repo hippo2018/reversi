@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/ReversiGame.php';
 
+if (is_file(__DIR__ . '/config.php')) {
+    require_once __DIR__ . '/config.php';
+}
+
 header('Content-Type: application/json; charset=utf-8');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Headers: Content-Type');
@@ -32,12 +36,15 @@ try {
     echo json_encode($response, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
 } catch (Throwable $e) {
     http_response_code($e instanceof InvalidArgumentException ? 400 : 500);
-    echo json_encode(['error' => $e->getMessage()], JSON_UNESCAPED_UNICODE);
+    if (!$e instanceof InvalidArgumentException) {
+        error_log((string)$e);
+    }
+    echo json_encode(['error' => $e instanceof InvalidArgumentException ? $e->getMessage() : 'サーバーでエラーが発生しました。管理者にお問い合わせください。'], JSON_UNESCAPED_UNICODE);
 }
 
 function database(): PDO
 {
-    $dataDir = __DIR__ . '/data';
+    $dataDir = defined('REVERSI_DATA_DIR') ? REVERSI_DATA_DIR : __DIR__ . '/data';
     if (!is_dir($dataDir)) {
         mkdir($dataDir, 0775, true);
     }

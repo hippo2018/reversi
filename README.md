@@ -68,4 +68,16 @@ npm run build
 ```
 
 生成物は `front/dist/` に出力されます。
-本番環境では同一オリジンの `/api.php` にPHP APIを配置するか、ビルド時の `VITE_API_BASE` でAPIのURLを指定してください。
+APIは画面と同じディレクトリの `./api.php` に接続します。
+
+## レンタルサーバー用の配布物
+
+```bash
+cd front
+npm install
+npm run build:deploy
+```
+
+`release/reversi-日時/` に、ビルド済み画面・PHPを含む `public/`、保存先の `storage/`、設置手順の `README.md` を生成します。サーバーでNode.jsを動かす必要はありません。配布用ビルドでは、以前設定した `VITE_API_BASE` を削除して同一ディレクトリのAPIを使用してください。
+
+アップロード先と保存先の設定は [レンタルサーバーへの設置手順](deploy/README.md) を参照してください。ドメイン直下とサブディレクトリの両方に対応します。

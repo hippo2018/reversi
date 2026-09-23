@@ -1,0 +1,5 @@
+DirectoryIndex index.html
+
+<FilesMatch "^(config\.php|ReversiGame\.php)$">
+    Require all denied
+</FilesMatch>

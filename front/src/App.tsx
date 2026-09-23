@@ -31,7 +31,7 @@ type GameState = {
   events: Array<{ message: string }>
 }
 
-const apiBase = import.meta.env.VITE_API_BASE ?? '/api.php'
+const apiBase = import.meta.env.VITE_API_BASE ?? 'http://localhost/reversi/back/api.php'
 const labels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
 
 function App() {
