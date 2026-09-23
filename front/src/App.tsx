@@ -31,7 +31,7 @@ type GameState = {
   events: Array<{ message: string }>
 }
 
-const apiBase = import.meta.env.VITE_API_BASE ?? 'http://127.0.0.1:8000/api.php'
+const apiBase = import.meta.env.VITE_API_BASE ?? '/api.php'
 const labels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
 
 function App() {

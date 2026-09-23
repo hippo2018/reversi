@@ -109,7 +109,8 @@ function playMove(PDO $pdo, array $input): array
     recordMove($pdo, $gameId, ReversiGame::BLACK, $x, $y, $flips);
 
     $player = ReversiGame::normalizePlayerAfterTurn($board, ReversiGame::WHITE, $events);
-    if ($player === ReversiGame::WHITE) {
+    // 黒がパスした場合は、黒が打てるようになるか終局するまでCOMが続けて打つ。
+    while ($player === ReversiGame::WHITE && ReversiGame::validMoves($board, ReversiGame::WHITE) !== []) {
         [$board, $computerMove] = ReversiGame::playComputerTurn($board);
         if ($computerMove !== null) {
             $lastMove = $computerMove;
